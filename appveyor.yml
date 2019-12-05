@@ -16,17 +16,11 @@ build_script:
       cmd /c download.bat;
       choco pack nomad.nuspec
 
-#test_script:
-#  - ps: cinst nomad -fdvy -source "$pwd;http://chocolatey.org/api/v2/"
-#  - ps: cuninst -fdvy nomad
-#  - ps: cinst nomad -fdvy -source "$pwd;http://chocolatey.org/api/v2/" -params '-bind=127.0.0.1'
-#  - ps: cuninst -fdvy nomad
-
 deploy_script:
   - ps: >-
       $version = $env:APPVEYOR_BUILD_VERSION -replace('\.\d*$');
       choco apiKey -k $env:TOKEN -source https://push.chocolatey.org/;
-      choco push nomad.$version.nupkg --trace --source https://push.chocolatey.org/
+      choco push nomad.$version.nupkg --source https://push.chocolatey.org/
 
 artifacts:
   - path: '**\*.nupkg'
