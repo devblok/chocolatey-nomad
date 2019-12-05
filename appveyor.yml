@@ -26,7 +26,7 @@ deploy_script:
   - ps: >-
       $version = $env:APPVEYOR_BUILD_VERSION -replace('\.\d*$');
       choco apiKey -k $env:TOKEN -source https://push.chocolatey.org/;
-      choco push nomad.$version.nupkg --verbose --source https://push.chocolatey.org/
+      choco push nomad.$version.nupkg --trace --source https://push.chocolatey.org/
 
 artifacts:
   - path: '**\*.nupkg'
