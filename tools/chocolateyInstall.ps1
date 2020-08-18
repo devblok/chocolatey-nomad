@@ -2,7 +2,6 @@
 $serviceName = "nomad"
 $binariesPath = $(Join-Path (Split-Path -parent $MyInvocation.MyCommand.Definition) "..\binaries\")
 $toolsPath = (Split-Path -Parent $MyInvocation.MyCommand.Definition)
-$wrapperExe = "$env:ChocolateyInstall\bin\nssm.exe"
 $serviceInstallationDirectory = "$env:PROGRAMDATA\nomad"
 $serviceLogDirectory = "$serviceInstallationDirectory\logs"
 $serviceConfigDirectory = "$serviceInstallationDirectory\conf"
@@ -84,6 +83,6 @@ if($service.Status -ne "Stopped" -and $service.Status -ne "Stopping") {
 }
 
 $service.WaitForStatus("Stopped", (New-TimeSpan -Minutes 1));
-& $wrapperExe start $serviceName | Out-Null
+& sc.exe start $serviceName | Out-Null
 
 Write-Host "Installed service: $serviceName"
