@@ -73,7 +73,7 @@ if ($service) {
 
 # Install the service
 Write-Host "Installing service: $serviceName"
-& sc.exe create $serviceName binpath= "$(Join-Path $toolsPath "nomad.exe") agent -config=$serviceConfigDirectory/client.hcl -data-dir=$serviceDataDirectory $packageParameters" type= share start= auto | Out-Null
+& sc.exe create $serviceName binpath= "$(Join-Path $toolsPath "nomad.exe") agent -config=$serviceConfigDirectory/client.hcl -data-dir=$serviceDataDirectory $packageParameters" start= auto | Out-Null
 cmd.exe /c "sc failure $serviceName reset= 0 actions= restart/60000" | Out-Null
 
 # Let this call to Get-Service throw if the service does not exist
