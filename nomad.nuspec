@@ -14,21 +14,17 @@
     <description>
 Nomad is a single binary that schedules applications and services on Linux, Windows, and Mac.
 It is an open source scheduler that uses a declarative job file for scheduling virtualized, containerized, and standalone applications.
-Uses NSSM as the service wrapper. More info at: https://nssm.cc/
 
 #### Package Parameters
 The package parameters can be set - https://www.nomadproject.io/docs/runtime/index.html
 These parameters can be passed to the installer with the use of `-params`.
-For example: `-params '-config-file="%PROGRAMDATA%\consul\dsc-config\default.json"'`.
+For example: `-params '-config="%PROGRAMDATA%\nomad\conf\client.hcl"'`.
     </description>
     <summary>Nomad is a single binary that schedules applications and services.</summary>
     <iconUrl>https://raw.githubusercontent.com/devblok/chocolatey-nomad/master/icons/nomad.png</iconUrl>
     <releaseNotes>Version 0.12.1</releaseNotes>
     <copyright>HashiCorp 2014</copyright>
     <tags>nomad service nomadproject.io</tags>
-    <dependencies>
-      <dependency id="NSSM" version="2.24.0" />
-    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

@@ -72,29 +72,9 @@ if ($service) {
   $service.delete() | Out-Null
 }
 
-Write-Host "Installing service: $serviceName"
 # Install the service
-& $wrapperExe install $serviceName $(Join-Path $toolsPath "nomad.exe") "agent -config=$serviceConfigDirectory/client.hcl -data-dir=$serviceDataDirectory $packageParameters" | Out-Null
-& $wrapperExe set $serviceName AppEnvironmentExtra GOMAXPROCS=$env:NUMBER_OF_PROCESSORS | Out-Null
-& $wrapperExe set $serviceName ObjectName NetworkService | Out-Null
-& $wrapperExe set $serviceName AppStdout "$serviceLogDirectory\nomad-output.log" | Out-Null
-& $wrapperExe set $serviceName AppStderr "$serviceLogDirectory\nomad-error.log" | Out-Null
-& $wrapperExe set $serviceName AppRotateBytes 10485760 | Out-Null
-& $wrapperExe set $serviceName AppRotateFiles 1 | Out-Null
-& $wrapperExe set $serviceName AppRotateOnline 1 | Out-Null
-
-# When nssm fully supports Rotate/Post Event hooks
-# $command = ('$now = Get-Date; dir "{0}" | where {{$_.LastWriteTime -le $now.AddDays(-7)}} | del -whatif' -f $serviceLogDirectory)
-# $action = ("Powershell.exe -NoProfile -WindowStyle Hidden -command '$({{0}})'" -f $command)
-# & $wrapperExe set nomad AppEvents "Rotate/Post" $action | Out-Null
-
-# Restart service on failure natively via Windows sc. There is a memory leak if service restart is performed via NSSM
-# The NSSM configuration will set the default behavior of NSSM to stop the service if
-# nomad fails (for example, unable to resolve cluster) and end the nssm.exe and nomad.exe process.
-# The sc configuration will set Recovery under the Nomad service properties such that a new instance will be started on failure,
-# spawning new nssm.exe and nomad.exe processes. In short, nothing changed from a functionality perspective (the service will
-# still attempt to restart on failure) but this method kills the nssm.exe process thus avoiding memory hog.
-& $wrapperExe set $serviceName AppExit Default Exit | Out-Null
+Write-Host "Installing service: $serviceName"
+& sc.exe create $serviceName binpath= "$(Join-Path $toolsPath "nomad.exe") agent -config=$serviceConfigDirectory/client.hcl -data-dir=$serviceDataDirectory $packageParameters" type= share start= auto | Out-Null
 cmd.exe /c "sc failure $serviceName reset= 0 actions= restart/60000" | Out-Null
 
 # Let this call to Get-Service throw if the service does not exist
