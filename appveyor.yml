@@ -1,4 +1,4 @@
-version: 0.12.3.{build}
+version: 0.12.4.{build}
 environment:
   TOKEN:
     secure: q0BlAHGaXBHcTnpUAPIpokRp12G6AsuiT3zBD3RZ7jUCuSziCYTvn4aYTrNzhNQ3
