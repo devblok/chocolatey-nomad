@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>nomad</id>
-    <version>0.11.6</version>
+    <version>0.12.7</version>
     <title>Nomad</title>
     <authors>HashiCorp</authors>
     <owners>devblok</owners>
@@ -22,7 +22,7 @@ For example: `-params '-config="%PROGRAMDATA%\nomad\conf\client.hcl"'`.
     </description>
     <summary>Nomad is a single binary that schedules applications and services.</summary>
     <iconUrl>https://raw.githubusercontent.com/devblok/chocolatey-nomad/master/icons/nomad.png</iconUrl>
-    <releaseNotes>Version 0.11.6</releaseNotes>
+    <releaseNotes>Version 0.12.7</releaseNotes>
     <copyright>HashiCorp 2014</copyright>
     <tags>nomad service nomadproject.io</tags>
   </metadata>
