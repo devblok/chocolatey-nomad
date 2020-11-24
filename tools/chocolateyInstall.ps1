@@ -14,7 +14,7 @@ if (-not ($packageParameters)) {
 }
 
 # Nomad related variables
-$nomadVersion = '0.12.8'
+$nomadVersion = '0.10.9'
 $sourcePath = if (Get-ProcessorBits 32) {
   $(Join-Path $binariesPath "$($nomadVersion)_windows_386.zip")
 } else {
