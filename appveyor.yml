@@ -1,4 +1,4 @@
-version: 1.1.1.{build}
+version: 1.1.2.{build}
 environment:
   TOKEN:
     secure: q0BlAHGaXBHcTnpUAPIpokRp12G6AsuiT3zBD3RZ7jUCuSziCYTvn4aYTrNzhNQ3
